@@ -1,7 +1,5 @@
 package rideco.groceryList.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +27,7 @@ public class User {
 		}
 	
 
-	public User(Integer userId, String name, int age, List<GroceryList> items) {
+	public User(Integer userId, String name, int age) {
 		super();
 		this.userId = userId;
 		this.name = name;

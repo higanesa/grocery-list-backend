@@ -13,50 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rideco.groceryList.entity.GroceryList;
-import rideco.groceryList.repository.GroceryListRepository;
+import rideco.groceryList.service.GroceryListService;
 
 @RestController
 public class GroceryListController {
 	
 	@Autowired
-	private GroceryListRepository groceryListRepository;
+	private GroceryListService groceryListService;
 	
 	@GetMapping("/groceryList")
-	List<GroceryList> getAllGroceryList() {
-	  return groceryListRepository.findAll();
+	public List<GroceryList> getAllGroceryList() {
+	  return groceryListService.getAllGroceryList();
 	}
 	
 	@PostMapping("/groceryList")
-	GroceryList createGroceryList(@RequestBody GroceryList newUser) {
-	  return groceryListRepository.save(newUser);
+	public GroceryList createGroceryList(@RequestBody GroceryList newUser) {
+	  return groceryListService.createGroceryList(newUser);
 	}
 	
 	@GetMapping("groceryList/{id}")
-	Optional<GroceryList> getGroceryListById(@PathVariable Integer id) {
+	public Optional<GroceryList> getGroceryListById(@PathVariable Integer id) {
 	    
-	  return groceryListRepository.findById(id);
+	  return groceryListService.getGroceryListById(id);
 	}
 	
 	@PutMapping("/groceryList/{id}")
-	GroceryList updateGroceryList(@RequestBody GroceryList newGroceryList, @PathVariable Integer id) {
+	public GroceryList updateGroceryList(@RequestBody GroceryList newGroceryList, @PathVariable Integer id) {
 	    
-	  return groceryListRepository.findById(id)
-	    .map(groceryList -> {
-	    	groceryList.setItemName(newGroceryList.getItemName());
-	    	groceryList.setItemQuantity(newGroceryList.getItemQuantity());
-	    	groceryList.setPurchased(newGroceryList.isPurchased());
-	    	groceryList.setUserId(newGroceryList.getUserId());
-	      return groceryListRepository.save(groceryList);
-	    })
-	    .orElseGet(() -> {
-	    	newGroceryList.setUserId(id);
-	      return groceryListRepository.save(newGroceryList);
-	    });
+	  return groceryListService.updateGroceryList(newGroceryList,id);
 	}
 	
 	@DeleteMapping("groceryList/{id}")
-	void deleteGroceryList(@PathVariable Integer id) {
-		groceryListRepository.deleteById(id);
+	public void deleteGroceryList(@PathVariable Integer id) {
+		groceryListService.deleteGroceryList(id);
 	}
 
 }

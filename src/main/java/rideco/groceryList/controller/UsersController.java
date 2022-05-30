@@ -13,48 +13,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import rideco.groceryList.entity.User;
-import rideco.groceryList.repository.UserRepository;
+import rideco.groceryList.service.UsersService;
 
 @RestController
 public class UsersController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UsersService usersService;
 	
 	@GetMapping("/users")
-	List<User> getAllUsers() {
-	  return userRepository.findAll();
+	public List<User> getAllUsers() {
+	  return usersService.getAllUsers();
 	}
 	
 	@PostMapping("/users")
-	User createUser(@RequestBody User newUser) {
-	  return userRepository.save(newUser);
+	public User createUser(@RequestBody User newUser) {
+	  return usersService.createUser(newUser);
 	}
 	
 	@GetMapping("users/{id}")
-	Optional<User> getUserById(@PathVariable Integer id) {
+	public Optional<User> getUserById(@PathVariable Integer id) {
 	    
-	  return userRepository.findById(id);
+	  return usersService.getUserById(id);
 	}
 	
 	@PutMapping("/users/{id}")
-	User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
+	public User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
 	    
-	  return userRepository.findById(id)
-	    .map(user -> {
-	      user.setName(newUser.getName());
-	      user.setAge(newUser.getAge());
-	      return userRepository.save(user);
-	    })
-	    .orElseGet(() -> {
-	    	newUser.setUserId(id);
-	      return userRepository.save(newUser);
-	    });
+	  return usersService.updateUser(newUser,id);
 	}
 	
 	@DeleteMapping("users/{id}")
+	public 
 	void deleteUser(@PathVariable Integer id) {
-		userRepository.deleteById(id);
+		usersService.deleteUser(id);
 	}
 	
 	
