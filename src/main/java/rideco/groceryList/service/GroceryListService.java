@@ -53,4 +53,12 @@ public class GroceryListService {
 		groceryListRepository.deleteById(id);
 	}
 
+	public Optional<GroceryList> updateGroceryListPurchased(Integer id) {
+		  return groceryListRepository.findById(id)
+				    .map(groceryList -> {				    	
+				    	groceryList.setPurchased(true);				    	
+				      return groceryListRepository.save(groceryList);
+				    });
+	}
+
 }

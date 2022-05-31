@@ -52,5 +52,10 @@ public class GroceryListController {
 	public void deleteGroceryList(@PathVariable Integer id) {
 		groceryListService.deleteGroceryList(id);
 	}
+	
+	@GetMapping("/groceryList/purchased/{id}")
+	public Optional<GroceryList> updateGroceryListPurchased(@PathVariable Integer id) {	    
+	  return groceryListService.updateGroceryListPurchased(id);
+	}
 
 }
