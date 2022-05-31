@@ -21,28 +21,33 @@ public class UsersController {
 	@Autowired
 	private UsersService usersService;
 	
+	// Controller method to get all users
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
 	  return usersService.getAllUsers();
 	}
 	
+	// Controller method to create new user
 	@PostMapping("/users")
 	public User createUser(@RequestBody User newUser) {
 	  return usersService.createUser(newUser);
 	}
 	
+	// Controller method to get user by ID
 	@GetMapping("users/{id}")
 	public Optional<User> getUserById(@PathVariable Integer id) {
 	    
 	  return usersService.getUserById(id);
 	}
 	
+	// Controller method to update/edit user
 	@PutMapping("/users/{id}")
 	public User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
 	    
 	  return usersService.updateUser(newUser,id);
 	}
 	
+	// Controller method to delete user
 	@DeleteMapping("users/{id}")
 	public 
 	void deleteUser(@PathVariable Integer id) {

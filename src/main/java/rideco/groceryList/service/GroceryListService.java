@@ -17,19 +17,23 @@ public class GroceryListService {
 	@Autowired
 	private GroceryListRepository groceryListRepository;
 	
+	// Service method to get all grocery list items
 	public List<GroceryList> getAllGroceryList() {
 	  return groceryListRepository.findAll();
 	}
 	
+	// Service method to create new grocery list item
 	public GroceryList createGroceryList(@RequestBody GroceryList newUser) {
 	  return groceryListRepository.save(newUser);
 	}
 	
+	// Service method to get grocery list item by ID
 	public Optional<GroceryList> getGroceryListById(@PathVariable Integer id) {
 	    
 	  return groceryListRepository.findById(id);
 	}
 	
+	// Service method to update/edit grocery list item
 	public GroceryList updateGroceryList(@RequestBody GroceryList newGroceryList, @PathVariable Integer id) {
 	    
 	  return groceryListRepository.findById(id)
@@ -46,6 +50,7 @@ public class GroceryListService {
 	    });
 	}
 	
+	// Delete method to delete grocery list item
 	public void deleteGroceryList(@PathVariable Integer id) {
 		groceryListRepository.deleteById(id);
 	}

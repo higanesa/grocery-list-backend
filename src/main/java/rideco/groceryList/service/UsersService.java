@@ -17,19 +17,23 @@ public class UsersService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	// Service method to get all users
 	public List<User> getAllUsers() {
 		  return userRepository.findAll();
 		}
 	
+	// Service method to create new user
 	public User createUser(@RequestBody User newUser) {
 	  return userRepository.save(newUser);
 	}
 	
+	// Service method to get user by ID
 	public Optional<User> getUserById(@PathVariable Integer id) {
 	    
 	  return userRepository.findById(id);
 	}
 	
+	// Service method to update/edit user
 	public User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
 	    
 	  return userRepository.findById(id)
@@ -44,6 +48,7 @@ public class UsersService {
 	    });
 	}
 	
+	// Service method to delete user
 	public void deleteUser(@PathVariable Integer id) {
 		userRepository.deleteById(id);
 	}
