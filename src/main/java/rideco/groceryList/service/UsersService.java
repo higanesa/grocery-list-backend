@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import rideco.groceryList.entity.User;
 import rideco.groceryList.repository.UserRepository;
@@ -23,18 +21,18 @@ public class UsersService {
 		}
 	
 	// Service method to create new user
-	public User createUser(@RequestBody User newUser) {
+	public User createUser(User newUser) {
 	  return userRepository.save(newUser);
 	}
 	
 	// Service method to get user by ID
-	public Optional<User> getUserById(@PathVariable Integer id) {
+	public Optional<User> getUserById(Integer id) {
 	    
 	  return userRepository.findById(id);
 	}
 	
 	// Service method to update/edit user
-	public User updateUser(@RequestBody User newUser, @PathVariable Integer id) {
+	public User updateUser(User newUser, Integer id) {
 	    
 	  return userRepository.findById(id)
 	    .map(user -> {
@@ -49,7 +47,7 @@ public class UsersService {
 	}
 	
 	// Service method to delete user
-	public void deleteUser(@PathVariable Integer id) {
+	public void deleteUser(Integer id) {
 		userRepository.deleteById(id);
 	}
 

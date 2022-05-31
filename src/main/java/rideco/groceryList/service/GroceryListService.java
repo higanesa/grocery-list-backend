@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import rideco.groceryList.entity.GroceryList;
 import rideco.groceryList.repository.GroceryListRepository;
@@ -23,18 +21,18 @@ public class GroceryListService {
 	}
 	
 	// Service method to create new grocery list item
-	public GroceryList createGroceryList(@RequestBody GroceryList newUser) {
+	public GroceryList createGroceryList(GroceryList newUser) {
 	  return groceryListRepository.save(newUser);
 	}
 	
 	// Service method to get grocery list item by ID
-	public Optional<GroceryList> getGroceryListById(@PathVariable Integer id) {
+	public Optional<GroceryList> getGroceryListById(Integer id) {
 	    
 	  return groceryListRepository.findById(id);
 	}
 	
 	// Service method to update/edit grocery list item
-	public GroceryList updateGroceryList(@RequestBody GroceryList newGroceryList, @PathVariable Integer id) {
+	public GroceryList updateGroceryList(GroceryList newGroceryList, Integer id) {
 	    
 	  return groceryListRepository.findById(id)
 	    .map(groceryList -> {
@@ -51,7 +49,7 @@ public class GroceryListService {
 	}
 	
 	// Delete method to delete grocery list item
-	public void deleteGroceryList(@PathVariable Integer id) {
+	public void deleteGroceryList(Integer id) {
 		groceryListRepository.deleteById(id);
 	}
 
